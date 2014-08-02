@@ -26,7 +26,11 @@ public class Bullet : MonoBehaviour
 			transform.position += transform.forward * (shootSpeed * Time.deltaTime);
 			yield return 0;
 		}
+
+		//Spawn a pooled explosion prefab
 		explosionPrefab.Spawn(transform.position);
-		this.Recycle();
+
+		//Recycle this pooled bullet instance
+		gameObject.Recycle();
 	}
 }

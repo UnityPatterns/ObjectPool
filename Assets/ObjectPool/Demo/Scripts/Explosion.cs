@@ -22,6 +22,8 @@ public class Explosion : MonoBehaviour
 			elapsed += Time.deltaTime;
 			yield return 0;
 		}
-		this.Recycle();
+
+		//Recycle this pooled explosion instance
+		gameObject.Recycle();
 	}
 }
