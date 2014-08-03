@@ -399,20 +399,20 @@ public static class ObjectPoolExtensions
 		ObjectPool.RecycleAll(prefab);
 	}
 
-	public static int CountPooled<T>(T prefab) where T : Component
+	public static int CountPooled<T>(this T prefab) where T : Component
 	{
 		return ObjectPool.CountPooled(prefab);
 	}
-	public static int CountPooled(GameObject prefab)
+	public static int CountPooled(this GameObject prefab)
 	{
 		return ObjectPool.CountPooled(prefab);
 	}
 
-	public static int CountSpawned<T>(T prefab) where T : Component
+	public static int CountSpawned<T>(this T prefab) where T : Component
 	{
 		return ObjectPool.CountSpawned(prefab);
 	}
-	public static int CountSpawned(GameObject prefab)
+	public static int CountSpawned(this GameObject prefab)
 	{
 		return ObjectPool.CountSpawned(prefab);
 	}
