@@ -258,6 +258,11 @@ public sealed class ObjectPool : MonoBehaviour
 		{
 			if (_instance != null)
 				return _instance;
+
+			_instance = Object.FindObjectOfType<ObjectPool>();
+			if (_instance != null)
+				return _instance;
+
 			var obj = new GameObject("ObjectPool");
 			obj.transform.localPosition = Vector3.zero;
 			obj.transform.localRotation = Quaternion.identity;
