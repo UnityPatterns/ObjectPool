@@ -80,6 +80,26 @@ public sealed class ObjectPool : MonoBehaviour
 	{
 		return Spawn(prefab.gameObject, parent, position, rotation).GetComponent<T>();
 	}
+	public static T Spawn<T>(T prefab, Vector3 position, Quaternion rotation) where T : Component
+	{
+		return Spawn(prefab.gameObject, null, position, rotation).GetComponent<T>();
+	}
+	public static T Spawn<T>(T prefab, Transform parent, Vector3 position) where T : Component
+	{
+		return Spawn(prefab.gameObject, parent, position, Quaternion.identity).GetComponent<T>();
+	}
+	public static T Spawn<T>(T prefab, Vector3 position) where T : Component
+	{
+		return Spawn(prefab.gameObject, null, position, Quaternion.identity).GetComponent<T>();
+	}
+	public static T Spawn<T>(T prefab, Transform parent) where T : Component
+	{
+		return Spawn(prefab.gameObject, parent, Vector3.zero, Quaternion.identity).GetComponent<T>();
+	}
+	public static T Spawn<T>(T prefab) where T : Component
+	{
+		return Spawn(prefab.gameObject, null, Vector3.zero, Quaternion.identity).GetComponent<T>();
+	}
 	public static GameObject Spawn(GameObject prefab, Transform parent, Vector3 position, Quaternion rotation)
 	{
 		List<GameObject> list;
@@ -123,6 +143,26 @@ public sealed class ObjectPool : MonoBehaviour
 			trans.localRotation = rotation;
 			return obj;
 		}
+	}
+	public static GameObject Spawn(GameObject prefab, Transform parent, Vector3 position)
+	{
+		return Spawn(prefab, parent, position, Quaternion.identity);
+	}
+	public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
+	{
+		return Spawn(prefab, null, position, rotation);
+	}
+	public static GameObject Spawn(GameObject prefab, Transform parent)
+	{
+		return Spawn(prefab, parent, Vector3.zero, Quaternion.identity);
+	}
+	public static GameObject Spawn(GameObject prefab, Vector3 position)
+	{
+		return Spawn(prefab, null, position, Quaternion.identity);
+	}
+	public static GameObject Spawn(GameObject prefab)
+	{
+		return Spawn(prefab, null, Vector3.zero, Quaternion.identity);
 	}
 
 	public static void Recycle<T>(T obj) where T : Component
