@@ -292,6 +292,31 @@ public sealed class ObjectPool : MonoBehaviour
 		return list;
 	}
 
+	public static void DestroyPooled(GameObject prefab)
+	{
+		List<GameObject> pooled;
+		if (instance.pooledObjects.TryGetValue(prefab, out pooled))
+		{
+			for (int i = 0; i < pooled.Count; ++i)
+				GameObject.Destroy(pooled[i]);
+			pooled.Clear();
+		}
+	}
+	public static void DestroyPooled<T>(T prefab) where T : Component
+	{
+		DestroyPooled(prefab.gameObject);
+	}
+
+	public static void DestroyAll(GameObject prefab)
+	{
+		RecycleAll(prefab);
+		DestroyPooled(prefab);
+	}
+	public static void DestroyAll<T>(T prefab) where T : Component
+	{
+		DestroyAll(prefab.gameObject);
+	}
+
 	public static ObjectPool instance
 	{
 		get
@@ -465,5 +490,23 @@ public static class ObjectPoolExtensions
 	public static List<T> GetPooled<T>(this T prefab) where T : Component
 	{
 		return ObjectPool.GetPooled(prefab, null, false);
+	}
+
+	public static void DestroyPooled(this GameObject prefab)
+	{
+		ObjectPool.DestroyPooled(prefab);
+	}
+	public static void DestroyPooled<T>(this T prefab) where T : Component
+	{
+		ObjectPool.DestroyPooled(prefab.gameObject);
+	}
+
+	public static void DestroyAll(this GameObject prefab)
+	{
+		ObjectPool.DestroyAll(prefab);
+	}
+	public static void DestroyAll<T>(this T prefab) where T : Component
+	{
+		ObjectPool.DestroyAll(prefab.gameObject);
 	}
 }
